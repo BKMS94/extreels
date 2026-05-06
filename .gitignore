@@ -1,0 +1,89 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+pythonenv*
+
+# Virtual Environment (tu carpeta venv)
+venv/
+venv_*/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+.directory
+
+# Logs y bases de datos
+*.log
+*.db
+*.sqlite
+*.sqlite3
+logs/
+descargados.db
+
+# Videos descargados
+videos_tiktok/
+videos_mecanica/
+*.mp4
+*.webm
+*.mkv
+*.avi
+*.mov
+
+# Archivos temporales
+*.tmp
+*.temp
+temp/
+tmp/
+*.cache
+.cache/
+*.part
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Playwright
+playwright-report/
+test-results/
+__pycache__/
+
+# Configuración local
+config.local.py
+.env
+.env.local
+.env.*.local
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Linux
+.directory
+*.pid
+*.lock
+
+# Archivos de ejecución
+*.exe
+*.msi
+*.dll
+*.bat
+*.ps1
