@@ -11,7 +11,7 @@ Este proyecto automatiza la extracción de URLs de videos de TikTok dentro de la
 - Conexión a Brave mediante `--remote-debugging-port`
 - Uso de `playwright` para interactuar con la interfaz web de TikTok
 - Extracción de enlaces TikTok en mensajes
-- Descarga de videos con `yt-dlp`
+- Descarga de videos con `yt-dlp` en formato MP4 compatible con reproductores generales
 - Detección de duplicados mediante SQLite
 - Registro de actividad en `logs/`
 

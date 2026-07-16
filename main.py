@@ -10,6 +10,7 @@ import sqlite3
 import sys
 import subprocess
 import os
+import shutil
 from pathlib import Path
 from datetime import datetime
 from playwright.sync_api import sync_playwright
@@ -72,26 +73,34 @@ def marcar_descargado(url):
 
 # ========== DESCARGA ==========
 def descargar_video(url, carpeta):
-    """Descarga un video con yt-dlp"""
+    """Descarga un video con yt-dlp en formato MP4 compatible con reproductores generales."""
     if ya_descargado(url):
-        log.info(f"⏭️  Saltando (ya descargado)")
+        log.info("⏭️  Saltando (ya descargado)")
         return True
-    
+
     Path(carpeta).mkdir(parents=True, exist_ok=True)
-    
+
+    # Preferir MP4 en el formato más compatible, con fallback si el sitio no lo ofrece.
     opts = {
         'outtmpl': f'{carpeta}/%(title)s.%(ext)s',
-        'format': 'best',
+        'format': 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best',
         'quiet': False,
         'no_warnings': False,
+        'merge_output_format': 'mp4',
+        'postprocessors': [
+            {
+                'key': 'FFmpegVideoConvertor',
+                'preferedformat': 'mp4',
+            }
+        ] if shutil.which('ffmpeg') else [],
     }
-    
+
     try:
-        log.info(f"📥 Descargando...")
+        log.info("📥 Descargando en formato MP4...")
         with yt_dlp.YoutubeDL(opts) as ydl:
             ydl.download([url])
         marcar_descargado(url)
-        log.info(f"✅ Completado")
+        log.info("✅ Completado en MP4")
         return True
     except Exception as e:
         log.error(f"❌ Error: {str(e)[:100]}")
@@ -247,7 +256,7 @@ def main():
     log.info("🎬 EXTRACTOR DE TIKTOK v2.0")
     log.info("=" * 60)
     
-    # Abrir Brave automáticamente
+# Abrir Brave automáticamente
     if not abrir_brave():
         log.error("No se pudo abrir Brave. Abrelo manualmente con:")
         log.error('brave.exe --remote-debugging-port=9222')
